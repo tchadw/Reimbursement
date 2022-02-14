@@ -36,19 +36,21 @@ class Project {
         const totalDays = this.getTotalDays();
         return totalDays - 2;
     }
-    formatDate(date) {
-        const formatted = new Date(date).toLocaleDateString('en-us');
-        return formatted;
+    getTravelDays() {
+        console.log(`Get project travel days`);
     }
     getReimbursement() {
         const cost = this.lowCost;
         const fullDays = this.getFullDays();
+        const travelDays = this.getTravelDays();
+
+        //create conditional to determine project cost (high vs. low) and do math to calc reimbursement...
 
     }
-
-    // getTravelDays() {
-    //     console.log(`Get project travel days`);
-    // }
+    formatDate(date) {
+        const formatted = new Date(date).toLocaleDateString('en-us');
+        return formatted;
+    }
 
 
 
