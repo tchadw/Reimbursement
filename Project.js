@@ -12,10 +12,11 @@ class Project {
             Start Date: ${this.formatDate(this.startDate)}
             End Date: ${this.formatDate(this.endDate)}
             Total Days: ${this.getTotalDays()}
-            Total Dates: ${this.getTotalDates()}
             Full Days: ${this.getFullDays()}
             Each Date: ${this.getDates(this.startDate, this.endDate)}
+            Total Dates: ${this.getTotalDates()}
             Reimbursement: ${this.getReimbursement()}
+            Date Overlap: ${this.dateOverlap()}
         `);
     }
     getDates(startDate, endDate) {
@@ -61,12 +62,29 @@ class Project {
         const highCostFullDay = 85;
 
 
-        return lowCost === true ?
-            (travelDays * lowCostTravel) + (fullDays * lowCostFullDay)
-            :
-            (travelDays * highCostTravel) + (fullDays * highCostFullDay)
+        if (lowCost === true) {
+            if (this.dateOverlap()) {
+                return lowCostTravel + (fullDays * lowCostFullDay)
+            } else {
+                return (travelDays * lowCostTravel) + (fullDays * lowCostFullDay)
+            }
+        } else {
+            if (this.dateOverlap()) {
+                return highCostTravel + (fullDays * highCostFullDay)
+            } else {
+                return (travelDays * highCostTravel) + (fullDays * highCostFullDay)
+            }
+        }
 
-
+    }
+    dateOverlap() {
+        if (this.startDate.getFullYear() === this.endDate.getFullYear() &&
+            this.startDate.getMonth() === this.endDate.getMonth() &&
+            this.startDate.getDate() === this.endDate.getDate()) {
+            return true;
+        } else {
+            return false;
+        }
     }
     formatDate(date) {
         const formatted = new Date(date).toLocaleDateString('en-us');
@@ -146,7 +164,7 @@ project2.getProjectDetails();
 project3.getProjectDetails();
 
 
-projectSet2.getProjectSetDetails();
+// projectSet2.getProjectSetDetails();
 
 
 
