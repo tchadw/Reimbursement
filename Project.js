@@ -103,10 +103,13 @@ class ProjectSet extends Project {
 
     }
     getProjectSetDetails() {
-        const projects = this.projects.map(project => {
-            return project;
-        });
-        console.log(projects);
+
+        console.log(`
+            Project Set ${this.setNum}
+            Project Sequence Start Date (Travel Day): ${this.formatDate(this.getStartDate())}
+            Project Sequence End Date (Travel Day): ${this.formatDate(this.getEndDate())}
+
+        `);
     }
     getAllDates() {
         const dates = this.projects.map(project => {
@@ -114,18 +117,24 @@ class ProjectSet extends Project {
         });
         return dates;
     }
-    getProjectSequence() {
-        //
+    getStartDate() {
+        return this.projects[0].startDate;
+    }
+    getEndDate() {
+        return this.projects.at(-1).endDate;
+    }
+    getLowCostTravelDates() {
+        const projects = this.projects;
+
+        projects.forEach((project) => {
+
+        })
     }
     getEachReimbursement() {
-        // 
-    }
-    getTravelDays() {
-        //
-    }
-
-    getLowCostDates() {
-        //
+        //lowCostTravel
+        //highCostTravel
+        //lowCostFullDay
+        //highCostFullDay
     }
     getOverlappingDates() {
         // compare project A's endDate with this next project in the set with the earliest startDate
@@ -156,15 +165,20 @@ const project10 = new Project(3, false, new Date('09 02 2015'), new Date('09 02 
 const project11 = new Project(4, false, new Date('09 08 2015'), new Date('09 08 2015'));
 
 const projectSet1 = new ProjectSet(1, [project1]);
-const projectSet2 = new ProjectSet(1, [project2, project3, project4]);
-const projectSet3 = new ProjectSet(1, [project5, project6, project7]);
+const projectSet2 = new ProjectSet(2, [project2, project3, project4]);
+const projectSet3 = new ProjectSet(3, [project5, project6, project7]);
+const projectSet4 = new ProjectSet(4, [project8, project9, project10, project11]);
 
 project1.getProjectDetails();
 project2.getProjectDetails();
 project3.getProjectDetails();
 
 
-// projectSet2.getProjectSetDetails();
+projectSet1.getProjectSetDetails();
+projectSet2.getProjectSetDetails();
+projectSet3.getProjectSetDetails();
+projectSet4.getProjectSetDetails();
+
 
 
 
